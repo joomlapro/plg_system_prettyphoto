@@ -21,13 +21,14 @@ abstract class JHtmlPrettyphoto extends JHtmlJquery
 	/**
 	 * Method to load the jQuery Prettyphoto into the document head.
 	 *
-	 * @param   mixed  $debug  Is debugging mode on? [optional]
+	 * @param   string  $selector  The HTML selector.
+	 * @param   mixed   $debug     Is debugging mode on? [optional]
 	 *
 	 * @return  void
 	 *
 	 * @since   3.1
 	 */
-	public static function Prettyphoto($debug = null)
+	public static function Prettyphoto($selector = 'a[rel^="prettyPhoto"]', $debug = null)
 	{
 		// Include jQuery.
 		self::framework();
@@ -54,7 +55,7 @@ abstract class JHtmlPrettyphoto extends JHtmlJquery
 		$script[] = '(function($) {';
 		$script[] = '	$(function() {';
 		$script[] = '		$(document).ready(function() {';
-		$script[] = '			$(\'a[rel^="prettyPhoto"]\').prettyPhoto();';
+		$script[] = '			$(\'' . $selector . '\').prettyPhoto();';
 		$script[] = '		});';
 		$script[] = '	});';
 		$script[] = '})(jQuery);';

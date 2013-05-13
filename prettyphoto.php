@@ -39,10 +39,11 @@ class PlgSystemPrettyphoto extends JPlugin
 		// Register a function.
 		JHtml::register('jquery.prettyphoto', array('JHtmlPrettyphoto', 'prettyphoto'));
 
+		// Force load script.
 		if ($this->params->get('force'))
 		{
 			// Load the prettyphoto jquery script.
-			JHtml::_('jquery.prettyphoto');
+			JHtml::_('jquery.prettyphoto', $this->params->get('selector', 'a[rel^="prettyPhoto"]'));
 		}
 
 		return true;
