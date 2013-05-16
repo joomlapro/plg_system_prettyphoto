@@ -51,14 +51,9 @@ abstract class JHtmlPrettyphoto extends JHtmlJquery
 
 		// Build the script.
 		$script = array();
-		$script[] = 'jQuery.noConflict();';
-		$script[] = '(function($) {';
-		$script[] = '	$(function() {';
-		$script[] = '		$(document).ready(function() {';
-		$script[] = '			$(\'' . $selector . '\').prettyPhoto();';
-		$script[] = '		});';
-		$script[] = '	});';
-		$script[] = '})(jQuery);';
+		$script[] = 'jQuery(document).ready(function() {';
+		$script[] = '	jQuery(\'' . $selector . '\').prettyPhoto();';
+		$script[] = '});';
 
 		// Add the script to the document head.
 		$doc->addScriptDeclaration(implode("\n", $script));
