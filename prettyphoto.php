@@ -30,14 +30,14 @@ class PlgSystemPrettyphoto extends JPlugin
 		// Check that we are in the site application.
 		if (JFactory::getApplication()->isAdmin())
 		{
-			return true;
+			return;
 		}
 
 		// Register dependent classes.
 		JLoader::register('JHtmlPrettyphoto', __DIR__ . '/helpers/html/prettyphoto.php');
 
 		// Register a function.
-		JHtml::register('jquery.prettyphoto', array('JHtmlPrettyphoto', 'prettyphoto'));
+		JHtml::register('jquery.prettyphoto', array('JHtmlPrettyphoto', 'prettyPhoto'));
 
 		// Force load script.
 		if ($this->params->get('force'))
@@ -46,6 +46,6 @@ class PlgSystemPrettyphoto extends JPlugin
 			JHtml::_('jquery.prettyphoto', $this->params->get('selector', 'a[rel^="prettyPhoto"]'));
 		}
 
-		return true;
+		return;
 	}
 }

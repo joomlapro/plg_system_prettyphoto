@@ -10,16 +10,24 @@
 defined('JPATH_PLATFORM') or die;
 
 /**
- * Prettyphoto Utility class for jQuery JavaScript behaviors.
+ * prettyPhoto Utility class for jQuery JavaScript behaviors.
  *
  * @package     Joomla.Libraries
  * @subpackage  HTML
- * @since       3.0
+ * @since       3.2
  */
 abstract class JHtmlPrettyphoto extends JHtmlJquery
 {
 	/**
-	 * Method to load the jQuery Prettyphoto into the document head.
+	 * Array containing information for loaded files.
+	 *
+	 * @var    array
+	 * @since  3.2
+	 */
+	protected static $loaded = array();
+
+	/**
+	 * Method to load the jQuery prettyPhoto into the document head.
 	 *
 	 * @param   string  $selector  The HTML selector.
 	 * @param   mixed   $debug     Is debugging mode on? [optional]
@@ -28,10 +36,16 @@ abstract class JHtmlPrettyphoto extends JHtmlJquery
 	 *
 	 * @since   3.1
 	 */
-	public static function Prettyphoto($selector = 'a[rel^="prettyPhoto"]', $debug = null)
+	public static function prettyPhoto($selector = 'a[rel^="prettyPhoto"]', $debug = null)
 	{
-		// Include jQuery.
-		self::framework();
+		// Only load once
+		if (isset(static::$loaded[__METHOD__][$selector]))
+		{
+			return;
+		}
+
+		// Include jQuery framework.
+		static::framework();
 
 		// If no debugging value is set, use the configuration setting.
 		if ($debug === null)
@@ -41,22 +55,19 @@ abstract class JHtmlPrettyphoto extends JHtmlJquery
 		}
 
 		// Add Stylesheet.
-		JHtml::stylesheet('plg_system_prettyphoto/prettyPhoto.css', false, true, false);
+		JHtml::_('stylesheet', 'plg_system_prettyphoto/prettyPhoto.min.css', false, true, false, false, $debug);
 
 		// Add JavaScript.
-		JHtml::script('plg_system_prettyphoto/jquery.prettyPhoto.min.js', false, true);
+		JHtml::_('script', 'plg_system_prettyphoto/jquery.prettyPhoto.min.js', false, true, false, false, $debug);
 
-		// Get the document object.
-		$doc = JFactory::getDocument();
+		// Attach the prettyPhoto to the document.
+		JFactory::getDocument()->addScriptDeclaration(
+			"jQuery(document).ready(function() {
+				jQuery('$selector').prettyPhoto();
+			});"
+		);
 
-		// Build the script.
-		$script = array();
-		$script[] = 'jQuery(document).ready(function() {';
-		$script[] = '	jQuery(\'' . $selector . '\').prettyPhoto();';
-		$script[] = '});';
-
-		// Add the script to the document head.
-		$doc->addScriptDeclaration(implode("\n", $script));
+		static::$loaded[__METHOD__][$selector] = true;
 
 		return;
 	}

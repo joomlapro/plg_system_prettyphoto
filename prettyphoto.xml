@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<extension version="3.1" type="plugin" group="system" method="upgrade">
+<extension
+	type="plugin"
+	version="3.1"
+	group="system"
+	method="upgrade">
 	<name>plg_system_prettyphoto</name>
 	<author>Bruno Batista</author>
 	<creationDate>May 2013</creationDate>
@@ -12,25 +16,45 @@
 	<files>
 		<filename plugin="prettyphoto">prettyphoto.php</filename>
 		<filename>index.html</filename>
+		<folder>helpers</folder>
 	</files>
 	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_system_prettyphoto.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_prettyphoto.sys.ini</language>
 		<language tag="pt-BR">pt-BR/pt-BR.plg_system_prettyphoto.ini</language>
 		<language tag="pt-BR">pt-BR/pt-BR.plg_system_prettyphoto.sys.ini</language>
 	</languages>
-	<media destination="plg_system_prettyphoto" folder="media">
+	<media
+		destination="plg_system_prettyphoto"
+		folder="media">
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>js</folder>
+		<folder>less</folder>
 		<filename>index.html</filename>
 	</media>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="force" type="radio" class="btn-group" default="0" filter="integer" label="PLG_SYSTEM_PRETTYPHOTO_FIELD_FORCE_LABEL" description="PLG_SYSTEM_PRETTYPHOTO_FIELD_FORCE_DESC">
+				<field
+					name="force"
+					type="radio"
+					class="btn-group"
+					label="PLG_SYSTEM_PRETTYPHOTO_FIELD_FORCE_LABEL"
+					description="PLG_SYSTEM_PRETTYPHOTO_FIELD_FORCE_DESC"
+					default="0"
+					filter="integer">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="selector" type="text" size="40" class="inputbox" filter="string" label="PLG_SYSTEM_PRETTYPHOTO_FIELD_SELECTOR_LABEL" description="PLG_SYSTEM_PRETTYPHOTO_FIELD_SELECTOR_DESC" />
+				<field
+					name="selector"
+					type="text"
+					class="inputbox"
+					label="PLG_SYSTEM_PRETTYPHOTO_FIELD_SELECTOR_LABEL"
+					description="PLG_SYSTEM_PRETTYPHOTO_FIELD_SELECTOR_DESC"
+					size="40"
+					filter="string" />
 			</fieldset>
 		</fields>
 	</config>
